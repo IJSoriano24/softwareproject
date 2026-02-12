@@ -49,3 +49,5 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
   res.json("Welcome to the Meal API!");
 });
+
+// Export app for testing
