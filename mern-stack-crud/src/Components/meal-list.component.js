@@ -10,7 +10,7 @@ const MealList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/meals/")
+      .get("http://localhost:3000/meals/")
       .then(({ data }) => {
         setMeals(data);
       })

@@ -16,12 +16,14 @@ const CreateMeal = () => {
   // onSubmit handler
   const onSubmit = (mealObject) => {
     axios
-      .post("http://localhost:4000/meals/meals", mealObject)
+      .post("http://localhost:3000/meals/", mealObject)
       .then((res) => {
-        if (res.status === 200) alert("Meal successfully created");
-        else Promise.reject();
+        alert("Meal successfully created!");
       })
-      .catch((err) => alert("Something went wrong"));
+      .catch((err) => {
+        console.error("The error is:", err.response || err);
+        alert("Error: " + (err.response?.data?.message || err.message));
+      });
   };
 
   // Return meal form
