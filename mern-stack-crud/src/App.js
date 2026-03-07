@@ -63,7 +63,7 @@ const handleShow = () => setShow(true);
   </div>
 </div>
 
-              <Nav>
+  <Nav>
   {/* Modal Component */}
   <Button variant="outline-light" onClick={handleShow}>
     Launch Demo Modal

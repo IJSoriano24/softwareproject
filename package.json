@@ -8,6 +8,7 @@
     "formik": "^2.4.9",
     "mongoose": "^9.1.6",
     "react-bootstrap": "^2.10.10",
+    "react-calendar": "^6.0.0",
     "react-router-dom": "^7.13.0",
     "yup": "^1.7.1"
   },
