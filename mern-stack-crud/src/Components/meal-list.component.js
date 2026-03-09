@@ -32,18 +32,19 @@ const MealCalendarView = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row">
-        <div className="col-md-4">
-          <Calendar 
-            onChange={setSelectedDate} 
-            value={selectedDate} 
-            className="shadow-sm border-0 rounded"
-          />
-        </div>
+<div className="container-fluid mt-4 px-5"> {/* container-fluid uses the whole width */}
+    <div className="row">
+      {/* Calendar now takes up 100% of the row width */}
+      <div className="col-12 mb-5"> 
+        <Calendar 
+          onChange={setSelectedDate} 
+          value={selectedDate} 
+          className="custom-calendar shadow-sm border-0 rounded"
+        />
+      </div>
         
-        <div className="col-md-8">
-          <h4 className="mb-3">Meals for {selectedDate.toDateString()}</h4>
+        <div className="col-md-12">
+          <h4 className="mb-3 text-center">Meals for {selectedDate.toDateString()}</h4>
           <div className="table-wrapper">
             <Table striped bordered hover>
               <thead>

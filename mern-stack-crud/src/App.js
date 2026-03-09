@@ -29,66 +29,23 @@ const [show, setShow] = React.useState(false);
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 
-  return (
+return (
     <Router>
       <div className="App">
         <header className="App-header">
           <Navbar bg="dark" variant="dark">
             <Container>
               <Navbar.Brand>
-                <Link to={"/create-meal"} className="nav-link">
+                <Link to={"/meal-list"} className="nav-link">
                   Sustainable Future
                 </Link>
               </Navbar.Brand>
 
               <Nav className="justify-content-end">
-
-                <div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <Nav>
-  {/* Modal Component */}
-  <Button variant="outline-light" onClick={handleShow}>
-    Launch Demo Modal
-  </Button>
-
-
-  <Modal show={show} onHide={handleClose}>
-    <Modal.Header closeButton>
-      <Modal.Title>Sustainable Future Tip</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <Link to={"/create-meal"} className="nav-link">
-        Add your meal
-      </Link>
-                
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={handleClose}>
-        Close
-      </Button>
-    </Modal.Footer>
-  </Modal>
-</Nav>
-
-
+                {/* 1. The Trigger Button */}
+                <Button variant="primary" onClick={handleShow} className="me-2">
+                  Create New Meal
+                </Button>
 
                 <Nav>
                   <Link to={"/meal-list"} className="nav-link">
@@ -100,15 +57,25 @@ const handleShow = () => setShow(true);
           </Navbar>
         </header>
 
+        {/* 2. The Modal containing the Component */}
+        <Modal show={show} onHide={handleClose} size="lg">
+          <Modal.Header closeButton>
+            <Modal.Title>Add a New Meal</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* We pass handleClose so the form can shut the modal on success */}
+            <CreateMeal closeModal={handleClose} />
+          </Modal.Body>
+        </Modal>
+
         <Container>
           <Row>
             <Col md={12}>
               <div className="wrapper">
                 <Routes>
-                  <Route path="/" element={<CreateMeal />} />
-                  <Route path="/create-meal" element={<CreateMeal />} />
-                  <Route path="/edit-meal/:id" element={<EditMeal />} />
+                  <Route path="/" element={<MealList />} />
                   <Route path="/meal-list" element={<MealList />} />
+                  <Route path="/edit-meal/:id" element={<EditMeal />} />
                 </Routes>
               </div>
             </Col>

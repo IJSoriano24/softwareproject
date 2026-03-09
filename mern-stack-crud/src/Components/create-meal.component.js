@@ -1,24 +1,23 @@
-// src/Components/create-meal.component.js
 
-// CreateMeal Component for add new meal
-// Import Modules
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MealForm from "./MealForm";
 
-// CreateMeal Component
-const CreateMeal = () => {
+//createmeal component
+const CreateMeal = ({ closeModal }) => { 
   const [formValues, setFormValues] = useState({
     name: "",
     ingredients: "",
     timeprep: "",
   });
-  // onSubmit handler
+
   const onSubmit = (mealObject) => {
     axios
       .post("http://localhost:3000/meals/", mealObject)
       .then((res) => {
         alert("Meal successfully created!");
+        if (closeModal) closeModal(); 
+       
       })
       .catch((err) => {
         console.error("The error is:", err.response || err);
@@ -26,7 +25,6 @@ const CreateMeal = () => {
       });
   };
 
-  // Return meal form
   return (
     <MealForm initialValues={formValues} onSubmit={onSubmit} enableReinitialize>
       Create Meal
@@ -34,5 +32,4 @@ const CreateMeal = () => {
   );
 };
 
-// Export CreateMeal Component
 export default CreateMeal;

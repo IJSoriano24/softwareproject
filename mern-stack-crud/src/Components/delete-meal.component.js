@@ -1,13 +1,12 @@
 //src/Components/delete-meal.component.js
-// DeleteMeal Component for delete meal data
-// Import Modules
+
 import React from "react";
 import axios from "axios";
 
 
-// DeleteMeal Component
+//deletemeal component
 const DeleteMeal = (props) => {
-  // onSubmit handler
+ 
   const onSubmit = () => {
     axios
       .delete("http://localhost:3000/meals/" + props.match.params.id)
