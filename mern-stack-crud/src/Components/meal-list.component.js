@@ -21,7 +21,9 @@ const MealCalendarView = () => {
   }, []);
 
   const filteredMeals = meals.filter((meal) => {
+    if (!meal.date) return false;
     const mealDate = new Date(meal.date).toDateString();
+    const selectedDateString = selectedDate.toDateString();
     return mealDate === selectedDate.toDateString();
   });
 

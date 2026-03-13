@@ -19,7 +19,6 @@ const DeleteMeal = (props) => {
       .catch((err) => alert("Something went wrong"));
   };
 
-  // Return delete confirmation
   return (
     <div className="delete-meal">
       <h3>Are you sure you want to delete this meal?</h3>

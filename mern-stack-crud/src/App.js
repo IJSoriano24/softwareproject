@@ -5,8 +5,6 @@ import React from "react";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
-
-
 // Import Bootstrap
 import { Nav, Navbar, Container, Row, Col, Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
