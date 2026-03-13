@@ -20,12 +20,15 @@ const MealCalendarView = () => {
       });
   }, []);
 
-  const filteredMeals = meals.filter((meal) => {
-    if (!meal.date) return false;
-    const mealDate = new Date(meal.date).toDateString();
-    const selectedDateString = selectedDate.toDateString();
-    return mealDate === selectedDate.toDateString();
-  });
+const filteredMeals = meals.filter((meal) => {
+  if (!meal.date) return false;
+
+  const mealDateObj = new Date(meal.date);
+  const mealDateStr = mealDateObj.toISOString().split('T')[0];
+  const selectedDateStr = selectedDate.toISOString().split('T')[0];
+
+  return mealDateStr === selectedDateStr;
+});
 
   const DataTable = () => {
     return filteredMeals.map((res, i) => {
@@ -34,7 +37,7 @@ const MealCalendarView = () => {
   };
 
   return (
-<div className="container-fluid mt-4 px-5"> {/* container-fluid uses the whole width */}
+<div className="container-fluid mt-4 px-5"> 
     <div className="row">
       {/* Calendar now takes up 100% of the row width */}
       <div className="col-12 mb-5"> 

@@ -33,10 +33,7 @@ mongoose
 // Routes
 app.use("/meals", mealRoute);
 
-// 404 Error
-app.use((req, res) => {
-  res.status(404).send("Error 404: Not Found!");
-});
+
 
 // Global Error Handler
 app.use((err, req, res, next) => {
@@ -54,4 +51,7 @@ app.get("/", (req, res) => {
   res.json("Welcome to the Meal API!");
 });
 
-// Export app for testing
+// 404 Error
+app.use((req, res) => {
+  res.status(404).send("Error 404: Not Found!");
+});

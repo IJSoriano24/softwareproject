@@ -4,11 +4,12 @@ import axios from "axios";
 import MealForm from "./MealForm";
 
 //createmeal component
-const CreateMeal = ({ closeModal }) => { 
+const CreateMeal = ({ closeModal }) => {
   const [formValues, setFormValues] = useState({
     name: "",
     ingredients: "",
     timeprep: "",
+    date: new Date().toISOString().split('T')[0],
   });
 
   const onSubmit = (mealObject) => {
@@ -17,12 +18,14 @@ const CreateMeal = ({ closeModal }) => {
       .then((res) => {
         alert("Meal successfully created!");
         if (closeModal) closeModal(); 
-       
+        window.location.reload();
+      
       })
       .catch((err) => {
         console.error("The error is:", err.response || err);
         alert("Error: " + (err.response?.data?.message || err.message));
       });
+      
   };
 
   return (
