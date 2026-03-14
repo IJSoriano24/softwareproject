@@ -29,5 +29,5 @@ const DeleteMeal = (props) => {
   );
 };
 
-// Export DeleteMeal Component
+//export DeleteMeal Component
 export default DeleteMeal;

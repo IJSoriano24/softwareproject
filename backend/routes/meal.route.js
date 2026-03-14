@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const Meal = require("../models/Meal");
 
-// CREATE
+//create
 router.post("/", async (req, res, next) => {
   try {
     const data = await Meal.create(req.body);
@@ -14,27 +14,27 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// READ All
+//read all
 router.get("/", async (req, res, next) => {
   try {
-    const data = await Meal.find();
+    const data = await Meal.find().populate("ingredients");
     res.json(data);
   } catch (error) {
     next(error);
   }
 });
 
-// READ One
-router.get("/:id", async (req, res, next) => {
+//read one
+router.get("/edit-meal/:id", async (req, res, next) => {
   try {
-    const data = await Meal.findById(req.params.id);
+    const data = await Meal.findById(req.params.id).populate("ingredients");
     res.json(data);
   } catch (error) {
     next(error);
   }
 });
 
-// UPDATE
+//update
 router.put("/:id", async (req, res, next) => {
   try {
     const data = await Meal.findByIdAndUpdate(req.params.id, req.body, {
@@ -46,7 +46,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-// DELETE
+//delete
 router.delete("/:id", async (req, res, next) => {
   try {
     const data = await Meal.findByIdAndDelete(req.params.id);
@@ -58,4 +58,4 @@ router.delete("/:id", async (req, res, next) => {
 
 module.exports = router;
 
-module.exports = router;
+

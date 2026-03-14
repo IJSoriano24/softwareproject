@@ -19,8 +19,8 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB Connection
-// Optimized MongoDB Connection in server.js
+//MongoDB Connection
+//Optimized MongoDB Connection in server.js
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -30,9 +30,9 @@ mongoose
     console.error("MongoDB connection error:", err);
   });
 
-// Routes
+//Routes
 app.use("/meals", mealRoute);
-
+app.use("/ingredients", require("./routes/ingredient.route"));
 
 
 // Global Error Handler
@@ -55,3 +55,4 @@ app.get("/", (req, res) => {
 app.use((req, res) => {
   res.status(404).send("Error 404: Not Found!");
 });
+

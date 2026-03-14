@@ -1,5 +1,3 @@
-//src/Components/MealTableRow.js
-
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -10,12 +8,12 @@ const MealTableRow = (props) => {
 
   const deleteMeal = () => {
     axios
-      .delete("http://localhost:4000/meals/meals/" + _id)
+      .delete("http://localhost:3000/meals/" + _id) 
       .then((res) => {
         if (res.status === 200) {
           alert("Meal successfully deleted");
           window.location.reload();
-        } else Promise.reject();
+        }
       })
       .catch((err) => alert("Something went wrong"));
   };
@@ -23,10 +21,19 @@ const MealTableRow = (props) => {
   return (
     <tr>
       <td>{name}</td>
-      <td>{ingredients}</td>
+      <td>
+        {/* FIX: Use 'ingredients' directly, not 'meal.ingredients' */}
+        {ingredients && ingredients.length > 0
+          ? ingredients.map((ing) => (
+              <span key={ing._id} className="badge bg-light text-dark me-1 border">
+                {ing.name}
+              </span>
+            ))
+          : "No ingredients"}
+      </td>
       <td>{timeprep}</td>
       <td>
-        <Link className="edit-link" to={"/edit-meal/" + _id}>
+        <Link className="btn btn-sm btn-success me-2" to={"/edit-meal/" + _id}>
           Edit
         </Link>
         <Button onClick={deleteMeal} size="sm" variant="danger">
