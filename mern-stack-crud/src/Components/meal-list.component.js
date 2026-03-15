@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import { Table } from "react-bootstrap";
 import MealTableRow from "./MealTableRow";
 
-const MealCalendarView = () => {
+const MealCalendarView = ({ onCreateMealForDate }) => {
   const [meals, setMeals] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -36,18 +36,39 @@ const filteredMeals = meals.filter((meal) => {
     });
   };
 
+  const renderAddMealControl = ({ date, view }) => {
+    if (view !== "month") {
+      return null;
+    }
+
+    return (
+      <span
+        className="calendar-add-meal-button"
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          setSelectedDate(date);
+          onCreateMealForDate?.(date);
+        }}
+      >
+        + Add Meal
+      </span>
+    );
+  };
+
+  //calender view
   return (
 <div className="container-fluid mt-4 px-5"> 
     <div className="row">
-      {/* Calendar now takes up 100% of the row width */}
-      <div className="col-12 mb-5"> 
+      <div className="col-8 mb-5"> 
         <Calendar 
           onChange={setSelectedDate} 
           value={selectedDate} 
           className="custom-calendar shadow-sm border-0 rounded"
+          tileContent={renderAddMealControl}
         />
       </div>
-        
+
         <div className="col-md-12">
           <h4 className="mb-3 text-center">Meals for {selectedDate.toDateString()}</h4>
           <div className="table-wrapper">

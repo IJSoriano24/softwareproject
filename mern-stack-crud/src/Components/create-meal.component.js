@@ -1,18 +1,18 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import MealForm from "./MealForm";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
 //createmeal component
-const CreateMeal = ({ closeModal }) => {
-  const [formValues, setFormValues] = useState({
+const CreateMeal = ({ closeModal, selectedDate }) => {
+  const formValues = {
     name: "",
     ingredients: [],
     timeprep: "",
-    date: new Date().toISOString().split('T')[0],
-  });
+    date: (selectedDate || new Date()).toISOString().split('T')[0],
+  };
 
  const onSubmit = (mealObject) => {
   const hasLocalIngredients = mealObject.ingredients.some((ing) => String(ing._id).startsWith("tmp-"));

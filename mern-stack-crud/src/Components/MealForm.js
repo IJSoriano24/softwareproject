@@ -10,6 +10,12 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
 const MealForm = (props) => {
   const [ingInput, setIngInput] = useState("");
   const [ingError, setIngError] = useState("");
+  const defaultInitialValues = {
+    name: "",
+    ingredients: [],
+    timeprep: "",
+    date: new Date().toISOString().split("T")[0],
+  };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Required"),
@@ -58,12 +64,8 @@ const MealForm = (props) => {
   return (
     <div className="form-wrapper">
       <Formik
-        initialValues={{
-          name: "",
-          ingredients: [],
-          timeprep: "",
-          date: new Date().toISOString().split("T")[0],
-        }}
+        initialValues={props.initialValues || defaultInitialValues}
+        enableReinitialize={props.enableReinitialize}
         validationSchema={validationSchema}
         onSubmit={props.onSubmit}
       >

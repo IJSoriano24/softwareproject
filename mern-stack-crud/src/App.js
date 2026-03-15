@@ -1,31 +1,31 @@
-// Import React
+//import react
 import React from "react";
 
-//Import popup
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-
-// Import Bootstrap
+//import bootstrap
 import { Nav, Navbar, Container, Row, Col, Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
-// Import Custom CSS
+//import custom CSS
 import "./App.css";
 
-// Import from react-router-dom
+//import from react-router-dom
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-// Import other React Components
+//import other React Components
 import CreateMeal from "./Components/create-meal.component";
 import EditMeal from "./Components/edit-meal.component";
 import MealList from "./Components/meal-list.component";
 
-// App Component
+//app component
 const App = () => {
 
 const [show, setShow] = React.useState(false);
+const [selectedCreateDate, setSelectedCreateDate] = React.useState(new Date());
 const handleClose = () => setShow(false);
-const handleShow = () => setShow(true);
+const handleShow = (date = new Date()) => {
+  setSelectedCreateDate(date);
+  setShow(true);
+};
 
 return (
     <Router>
@@ -40,8 +40,8 @@ return (
               </Navbar.Brand>
 
               <Nav className="justify-content-end">
-                {/* 1. The Trigger Button */}
-                <Button variant="primary" onClick={handleShow} className="me-2">
+               
+                <Button variant="primary" onClick={() => handleShow()} className="me-2">
                   Create New Meal
                 </Button>
 
@@ -55,25 +55,28 @@ return (
           </Navbar>
         </header>
 
-        {/* 2. The Modal containing the Component */}
+      {/* modal containing component */}
         <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header closeButton>
             <Modal.Title>Add a New Meal</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {/* We pass handleClose so the form can shut the modal on success */}
-            <CreateMeal closeModal={handleClose} />
+            {/* close modal when meal is successfully added */}
+            <CreateMeal closeModal={handleClose} selectedDate={selectedCreateDate} />
           </Modal.Body>
         </Modal>
+
+        
 
         <Container>
           <Row>
             <Col md={12}>
               <div className="wrapper">
                 <Routes>
-                  <Route path="/" element={<MealList />} />
-                  <Route path="/meal-list" element={<MealList />} />
+                  <Route path="/" element={<MealList onCreateMealForDate={handleShow} />} />
+                  <Route path="/meal-list" element={<MealList onCreateMealForDate={handleShow} />} />
                   <Route path="/edit-meal/:id" element={<EditMeal />} />
+                  <Route path="/shopping-list" element={<ShoppingList />} />
                 </Routes>
               </div>
             </Col>
