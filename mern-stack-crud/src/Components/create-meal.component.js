@@ -5,13 +5,19 @@ import MealForm from "./MealForm";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
+const formatLocalDate = (date) => {
+  const d = new Date(date);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+};
+
 //createmeal component
 const CreateMeal = ({ closeModal, selectedDate }) => {
   const formValues = {
     name: "",
     ingredients: [],
     timeprep: "",
-    date: (selectedDate || new Date()).toISOString().split('T')[0],
+    date: formatLocalDate(selectedDate || new Date()),
   };
 
  const onSubmit = (mealObject) => {

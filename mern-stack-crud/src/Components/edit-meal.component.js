@@ -3,11 +3,18 @@ import axios from "axios";
 import MealForm from "./MealForm";
 import { useParams, useNavigate } from "react-router-dom"; 
 
+const formatLocalDate = (date) => {
+  const d = new Date(date);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+};
+
 const EditMeal = () => {
   const [formValues, setFormValues] = useState({
     name: "",
-    ingredients: "",
+    ingredients: [],
     timeprep: "",
+    date: "",
   });
 
   const { id } = useParams();
@@ -28,10 +35,15 @@ const EditMeal = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/meals/" + id)
+      .get("http://localhost:3000/meals/edit-meal/" + id)
       .then((res) => {
-        const { name, ingredients, timeprep } = res.data;
-        setFormValues({ name, ingredients, timeprep });
+        const { name, ingredients, timeprep, date } = res.data;
+        setFormValues({
+          name: name || "",
+          ingredients: Array.isArray(ingredients) ? ingredients : [],
+          timeprep: timeprep || "",
+          date: date ? formatLocalDate(date) : "",
+        });
       })
       .catch((err) => console.log(err));
   }, [id]); 

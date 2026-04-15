@@ -2,19 +2,23 @@
 import React from "react";
 
 //import bootstrap
-import { Nav, Navbar, Container, Row, Col, Button, Modal } from "react-bootstrap";
+import { Nav, Navbar, Container, Row, Col, Button, Modal, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 //import custom CSS
 import "./App.css";
 
 //import from react-router-dom
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 
 //import other React Components
 import CreateMeal from "./Components/create-meal.component";
 import EditMeal from "./Components/edit-meal.component";
 import MealList from "./Components/meal-list.component";
+import EditProfile from "./pages/EditProfile";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
 //app component
 const App = () => {
@@ -31,26 +35,38 @@ return (
     <Router>
       <div className="App">
         <header className="App-header">
-          <Navbar bg="dark" variant="dark">
-            <Container>
+          <Navbar className="header">
+            <Container >
               <Navbar.Brand>
-                <Link to={"/meal-list"} className="nav-link">
+                <Link to={"/meal-list"} className="nav-link" style={{color: "#B9BF90", fontWeight: "800"}}>
                   Sustainable Future
                 </Link>
               </Navbar.Brand>
 
-              <Nav className="justify-content-end">
-               
-                <Button variant="primary" onClick={() => handleShow()} className="me-2">
-                  Create New Meal
-                </Button>
+<Nav className="justify-content-end align-items-center">
+  <Button variant="" onClick={() => handleShow()} className="me-2 create-new-btn">
+    Create New Meal
+  </Button>
 
-                <Nav>
-                  <Link to={"/meal-list"} className="nav-link">
-                    Meal Planner
-                  </Link>
-                </Nav>
-              </Nav>
+  <Link to={"/meal-list"} className="nav-link me-2 view-btn">
+    Meal Planner
+  </Link>
+
+  {/* Settings Dropdown */}
+  <NavDropdown title="Settings" id="basic-nav-dropdown" align="end">
+    <NavDropdown.Item as={Link} to="/edit-profile">
+      Edit Profile
+    </NavDropdown.Item>
+    <NavDropdown.Divider />
+    <NavDropdown.Item onClick={() => {
+      localStorage.removeItem("token");
+
+      window.location.href = "/login";
+    }}>
+      Logout
+    </NavDropdown.Item>
+  </NavDropdown>
+</Nav>
             </Container>
           </Navbar>
         </header>
@@ -66,17 +82,21 @@ return (
           </Modal.Body>
         </Modal>
 
-        
 
         <Container>
           <Row>
             <Col md={12}>
               <div className="wrapper">
                 <Routes>
-                  <Route path="/" element={<MealList onCreateMealForDate={handleShow} />} />
+
+                <Route path="/" element={<Navigate to="login" />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/meal-list" element={<MealList onCreateMealForDate={handleShow} />} />
                   <Route path="/edit-meal/:id" element={<EditMeal />} />
-                  <Route path="/shopping-list" element={<ShoppingList />} />
+                  <Route path="*" element={<Navigate to="/login" />} />
+                  <Route path="/edit-profile" element={<EditProfile />} />
                 </Routes>
               </div>
             </Col>

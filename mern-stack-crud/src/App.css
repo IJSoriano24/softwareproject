@@ -28,8 +28,8 @@ body h3 {
   line-height: normal;
   border-radius: 0.2rem;
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #5923c6;
+  border-color: #aef5be;
   margin-right: 10px;
   position: relative;
   top: 1px;
@@ -56,13 +56,19 @@ input[type="number"] {
   width: 100% !important;
   max-width: 100%;
   padding: 10px;
+  /* background-color: aqua; */
   font-family: Arial, Helvetica, sans-serif;
+  border-radius: 20px;
+
 }
 
 .react-calendar__tile {
   min-height: 96px;
   padding: 14px 10px !important;
   font-size: 1.1rem;
+  border: 1px solid #7E6352 !important; 
+  border-radius: 20px;
+
 }
 
 .react-calendar__tile abbr {
@@ -74,8 +80,7 @@ input[type="number"] {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 999px;
-  background-color: #198754;
-  color: #ffffff;
+  color: #fffefe;
   font-size: 0.72rem;
   font-weight: 600;
   line-height: 1.2;
@@ -91,7 +96,139 @@ input[type="number"] {
   margin-bottom: 1em;
 }
 
+/* heading of calender/navigation button */
 .react-calendar__navigation button {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+/* login */
+App {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  margin: 20px auto;
+}
+ 
+input {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* days with meals */
+.list-table {
+  background-color: #B9BF90;
+}
+
+.list-table-headings thead {
+  background-color: #AF8A73 ;
+  border-color: #7E6352;
+  color: #000000;
+}
+
+.list-table-headings thead th {
+  background-color: #AF8A73 ;
+  border-color: #7E6352 ;
+  color: #000000;
+}
+
+.list-table-headings tbody td {
+  background-color: #F7E4C6;
+  border-color: #7E6352 !important;
+  color: #000000;
+}
+
+/* calender hover effects */
+.react-calendar__tile--active {
+  background-color: #94AF74 !important;
+  color: #fefefe !important;
+}
+
+.react-calendar__tile--now{
+  background-color: #B9BF90 !important;
+  color: #fefefe !important;
+}
+
+.react-calendar__tile:enabled:hover {
+  background-color: #FFF8EB!important;
+}
+
+/* edit meal button */
+.edit-btn {
+  background-color: #B9BF90!important;
+  border-color: #7E6352 !important;
+  color: #fff !important;
+}
+
+.edit-btn:hover {
+  background-color: #d5dbae !important;
+  border-color: #7E6352 !important;
+  color: #fff !important;
+}
+
+/* delete meal button */
+.delete-btn {
+  background-color: #878C67 !important;
+  border-color: #7E6352!important;
+  color: #fff !important;
+}
+
+.delete-btn:hover {
+  background-color: #d5dbae!important;
+  border-color: #7E6352 !important;
+  color: #fff !important;
+}
+
+/* cart button
+ */
+.cart-btn {
+  background-color: #B9BF90!important;
+  border-color: #7E6352 !important;
+  color: #fff !important;
+}
+
+.cart-btn:hover {
+  background-color: #d5dbae !important;
+  border-color: #7E6352 !important;
+  color: #fff !important;
+}
+
+/* view button */
+.view-btn {
+  border-color: #7E6352 !important;
+  color: #38383881 !important;
+}
+
+.view-btn:hover {
+  border-color: #c19f89 !important;
+  color: #fff !important;
+}
+
+.view-btn--active.btn {
+  background-color: #AF8A73 !important;
+  border-color: #7E6352 !important;
+  color: #ffffff !important;
+}
+
+.header {
+  background-color: #F7E4C6!important;
+}
+
+.meal-planner-link:hover {
+  color: #000000 !important;
+  border-color: #7E6352 !important;
+}
+
+/* create new meal (header) */
+.create-new-btn {
+  background-color: none !important;
+  border-color: #7E6352!important;
+  color: #38383881 !important;
+}
+
+.create-new-btn:hover {
+  
+  border-color: #7E6352 !important;
+  color: #fff !important;
 }

@@ -7,6 +7,12 @@ import { FormGroup, Button } from "react-bootstrap";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
+const formatLocalDate = (value) => {
+  const date = new Date(value);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+};
+
 const MealForm = (props) => {
   const [ingInput, setIngInput] = useState("");
   const [ingError, setIngError] = useState("");
@@ -14,7 +20,7 @@ const MealForm = (props) => {
     name: "",
     ingredients: [],
     timeprep: "",
-    date: new Date().toISOString().split("T")[0],
+    date: formatLocalDate(new Date()),
   };
 
   const validationSchema = Yup.object({

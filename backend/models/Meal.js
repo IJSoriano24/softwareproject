@@ -1,4 +1,4 @@
-//models/Student.js
+//models/meal.js
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
