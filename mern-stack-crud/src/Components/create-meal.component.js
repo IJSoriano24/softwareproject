@@ -1,4 +1,3 @@
-
 import React from "react";
 import axios from "axios";
 import MealForm from "./MealForm";
@@ -43,8 +42,6 @@ const CreateMeal = ({ closeModal, selectedDate }) => {
   axios
     
     .post(`${API_BASE_URL}/meals/`, finalMealData) 
-
-    
 
     .then((res) => {
       alert("Meal successfully created!");

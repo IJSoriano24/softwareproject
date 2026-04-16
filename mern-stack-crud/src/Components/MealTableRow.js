@@ -26,17 +26,13 @@ const MealTableRow = (props) => {
     }
 
     axios
-      .post(
-        `http://localhost:3000/shopping-list/add-meal/${_id}`,
-        null,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`http://localhost:3000/shopping-list/add-meal/${_id}`, null, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(() => alert(`"${name}" ingredients added to shopping list!`))
       .catch((error) => {
         const message = error.response?.data?.message || error.message;
-        console.error("Failed to add to shopping list", message, error); 
+        console.error("Failed to add to shopping list", message, error);
         alert(`Failed to add to shopping list: ${message}`);
       });
   };
@@ -45,25 +41,40 @@ const MealTableRow = (props) => {
     <tr>
       <td>{name}</td>
       <td>
-
         {ingredients && ingredients.length > 0
           ? ingredients.map((ing) => (
-              <span key={ing._id} className="badge bg-light text-dark me-1 border">
+              <span
+                key={ing._id}
+                className="badge bg-light text-dark me-1 border"
+              >
                 {ing.name}
               </span>
             ))
           : "No ingredients"}
       </td>
       <td>{timeprep}</td>
-      <td>
-        <Link className="btn btn-sm btn-success me-2 edit-btn" to={"/edit-meal/" + _id}>
+      <td className="text-center">
+        <Link
+          className="btn btn-sm btn-success me-2 edit-btn"
+          to={"/edit-meal/" + _id}
+        >
           Edit
         </Link>
-        <Button onClick={deleteMeal} size="sm" variant="danger" className="me-2 delete-btn">
+        <Button
+          onClick={deleteMeal}
+          size="sm"
+          variant="danger"
+          className="me-2 delete-btn"
+        >
           Delete
         </Button>
-                
-          <Button onClick={addToShoppingList} size="sm" variant="success" className="me-2 cart-btn">
+
+        <Button
+          onClick={addToShoppingList}
+          size="sm"
+          variant="success"
+          className="me-2 cart-btn"
+        >
           🛒
         </Button>
       </td>
